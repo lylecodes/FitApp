@@ -5,7 +5,7 @@ import { Alert, Button, Platform, StyleSheet, Text, View } from "react-native";
 import { AUTH0_DOMAIN, AUTH0_CLIENT_ID } from "@env";
 
 const auth0ClientId = AUTH0_CLIENT_ID;
-const authorizationEndpoint = `${AUTH0_DOMAIN}/authorize`;
+const authorizationEndpoint = `${AUTH0_DOMAIN}/logout`;
 
 const useProxy = Platform.select({ web: false, default: true });
 const redirectUri = AuthSession.makeRedirectUri({ useProxy }); // <-- must be set in allowed logout urls
