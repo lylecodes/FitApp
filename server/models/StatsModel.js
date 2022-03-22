@@ -4,7 +4,6 @@ const StatsSchema = new mongoose.Schema({
   age: {
     type: Number,
   },
-
   sex: {
     type: String,
     required: true,
