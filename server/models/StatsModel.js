@@ -4,6 +4,7 @@ const StatsSchema = new mongoose.Schema({
   age: {
     type: Number,
   },
+
   sex: {
     type: String,
     required: true,
@@ -15,5 +16,6 @@ const StatsSchema = new mongoose.Schema({
     type: Number,
   },
 });
+
 
 module.exports = Stats = mongoose.model("stats", StatsSchema);
