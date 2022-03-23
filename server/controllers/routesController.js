@@ -1,7 +1,7 @@
 const user = require('../models/UserModel');
 const comment = require('../models/CommentModel');
 const commentSection = require('../models/CommentSectionModel');
-const media = require('../models/MediaModel');
+const media = require('../models/PostModel');
 const stats = require('../models/StatsModel');
 
 

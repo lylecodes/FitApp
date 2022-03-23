@@ -5,14 +5,21 @@ const server = http.createServer(app);
 const PORT = 3000;
 const mongoose = require("mongoose");
 
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const homeRouter = require('./routes/routes');
-const mediaRouter = require('./routes/mediaRoutes');
+const postRouter = require('./routes/postRoutes');
 const userRouter = require('./routes/userRoutes');
 
 require("dotenv").config();
 
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+app.use(cors());
 app.use('/', homeRouter);
-app.use('/media', mediaRouter);
+app.use('/post', postRouter);
 app.use('/user', userRouter);
 
 mongoose
