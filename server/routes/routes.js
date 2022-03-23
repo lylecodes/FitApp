@@ -6,5 +6,4 @@ const router = express.Router();
 // GET home page 
 router.get('/home', routesController.home);
 
-
 module.exports = router;

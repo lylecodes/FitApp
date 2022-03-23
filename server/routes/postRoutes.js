@@ -10,22 +10,22 @@ router.get('/:id', postController.postItem);
 // GET request to create post
 router.get('/create', postController.postCreateGet);
 
-// POST request to create post 
+// POST request to create a post 
 router.post('/create', postController.postCreatePost);
 
-// GET request to delete post
+// GET request to delete a post
 router.get('/:id/delete', postController.postDeleteGet);
 
-// POST request to delete post
+// POST request to delete a post
 router.post('/:id/delete', postController.postDeletePost);
 
-// GET request to update post
+// GET request to update a post
 router.get('/:id/update', postController.postUpdateGet);
 
-// POST request to update post
+// POST request to update a post
 router.post('/:id/update', postController.postUpdatePost);
 
-// POST request to add comment to post
+// POST request to add comment on a post
 router.post('/:id/comment', postController.postUpdateComment);
 
 module.exports = router;

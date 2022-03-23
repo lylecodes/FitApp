@@ -15,7 +15,7 @@ exports.postItem = (req, res) => {
              postContent: result
          })
     }).catch(err => console.error(err));
-}
+};
 
 // Get create post input/form
 exports.postCreateGet = (req, res) => {
@@ -24,10 +24,10 @@ exports.postCreateGet = (req, res) => {
         title: 'Upload an image or video',
         // render other objects
     })
-}
+};
 
 // Create post on POST
-exports.postCreatePost = (req, res, next) => {
+exports.postCreatePost = (req, res) => {
     const newDate = new Date();
 
     const User = new mongoose.Types.ObjectId();
@@ -50,9 +50,9 @@ exports.postCreatePost = (req, res, next) => {
     post.create(postItem);
     res.redirect('./');
      
-}
+};
 
-
+// Get post to delete
 exports.postDeleteGet = (req, res) => {
     const id = req.params.id;
     post.findById(id) 
@@ -63,8 +63,9 @@ exports.postDeleteGet = (req, res) => {
                 post: result
             })
         })
-}
+};
 
+// Delete post on POST
 exports.postDeletePost = (req, res) => {
     const id = req.params.id;
     console.log("FromDELETE" , req.params)
@@ -76,77 +77,49 @@ exports.postDeletePost = (req, res) => {
         }
     });
     res.redirect('/post')
-    // post.findOne({
-    //     _id: id
-    // }, (err, doc) => {
-    //     console.log('DOC', doc)
-    //     if(err){
-    //         console.log(err)
-    //     }
-    //     if(doc._id === req.user.id){
-    //         post.findOneAndDelete({
-    //             _id: id,
-    //         }, (err) => {
-    //             if(err) {
-    //                 console.log(err);
-    //             }
-    //         });
-    //         res.redirect('/post')
-    //     } else {
-    //         res.redirect(`/post/${id}/delete`)
-    //     }
-    // })
-}
+    // authenticated owner of post delete function here
+};
 
+// Get post to update
 exports.postUpdateGet = (req, res) => {
     post.findById(req.params.id) 
     .then(result => {
         console.log("UpdateGet", result)
-        // res.render('./post/update', {
-        //     title: 'Update post',
-        //     post: result
-        // })
+        res.render('./post/update', {
+            title: 'Update post',
+            post: result
+        })
     })
-}
+};
 
+// Update post on POST
 exports.postUpdatePost = (req, res) => {
     const newDate = new Date();
-    const dateCreated = new Date(newDate);
+    const dateUpdated = new Date(newDate);
     console.log("FromUPDATE" , req.oidc)
     post.findByIdAndUpdate({
         _id: req.params.id,
     }, {
         "caption": req.body.caption,
         "url": req.body.url,
-        dateCreated: dateCreated
+        $push: {
+            "tags" : {
+                $each: [req.body.tags]
+            }
+        },
+        dateUpdated: dateUpdated
     },(err, doc) => {
         if(err){
             console.log(err)
         } else{
-            console.log("Updated User : ", doc);
+            console.log("Updated Post : ", doc);
         }
     })
+    // authenticated owner of post delete function here
     res.redirect('/post')
-    // post.findOne({
-    //     _id: req.params.id
-    // }, (result, err, doc) => {
-    //     // console.log("FromUPDATERES" , result)
-    //     if(err){
-    //         console.log(err)
-    //     }
-    //     if(doc.User === req.oidc.user){
-    //         post.findByIdAndUpdate({
-    //             _id: req.params.id,
-    //         }, {
-    //             caption: "this is a updated caption",
-    //             url: "this is a updated URL",
-    //             // commentSection: null, <- find commentSection id
-    //             dateCreated: dateCreated
-    //         })
-    //     }
-    // })
-}
+};
 
+// Update comment post on POST
 exports.postUpdateComment = (req,res) => {
     console.log("res", req.params.id)
     const id = req.params.id;
@@ -166,4 +139,4 @@ exports.postUpdateComment = (req,res) => {
         }
     })
     res.redirect('/')
-}
+};
