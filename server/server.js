@@ -4,9 +4,9 @@ const http = require("http");
 const server = http.createServer(app);
 const PORT = 3000;
 const mongoose = require("mongoose");
-const AWS = require("aws-sdk");
-const fs = require("fs");
-const path = require("path");
+// const AWS = require("aws-sdk");
+// const fs = require("fs");
+// const path = require("path");
 
 const bodyParser = require('body-parser');
 const cors = require('cors');
