@@ -10,21 +10,23 @@ const PostSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-  url: {
+  mediaName: {
     type: String,
     required: true,
   },
-  comments: [{
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "user",
-      required: true,
-    } ,
-     comment: {
-       type: String,
-       default: ""
-      }
-  }],
+  comments: [
+    {
+      user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+        required: true,
+      },
+      comment: {
+        type: String,
+        default: "",
+      },
+    },
+  ],
   tags: [String],
   dateCreated: {
     type: Date,
