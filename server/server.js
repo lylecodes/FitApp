@@ -8,17 +8,22 @@ const AWS = require("aws-sdk");
 const fs = require("fs");
 const path = require("path");
 
-const homeRouter = require("./routes/routes");
-const mediaRouter = require("./routes/mediaRoutes");
-const userRouter = require("./routes/userRoutes");
-const { rejects } = require("assert");
-const { resolve } = require("path");
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const homeRouter = require('./routes/routes');
+const postRouter = require('./routes/postRoutes');
+const userRouter = require('./routes/userRoutes');
 
 require("dotenv").config();
 
-app.use("/", homeRouter);
-app.use("/media", mediaRouter);
-app.use("/user", userRouter);
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+app.use(cors());
+app.use('/', homeRouter);
+app.use('/post', postRouter);
+app.use('/user', userRouter);
 
 server.listen(PORT, () => {
   console.log(`listening on ${PORT}`);
