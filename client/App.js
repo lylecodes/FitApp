@@ -1,21 +1,7 @@
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
-import Login from "./screens/Login";
-import Logout from "./screens/Logout";
+import React from "react";
+import AuthNavigation from "./AuthNavigation";
+import SignedInStack from "./navigation";
 
 export default function App() {
-  return (
-    <SafeAreaView>
-      <Login />
-      <Logout />
-    </SafeAreaView>
-  );
+  return <AuthNavigation />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
