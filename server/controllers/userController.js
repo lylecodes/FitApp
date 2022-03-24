@@ -5,6 +5,7 @@ exports.getUsers = (req,res) => {
 users.find() 
     .then(results => {
         console.log("results", results)
+        return res.send(results);
     })
     .catch(err => console.error(err));
 };
@@ -15,6 +16,7 @@ exports.getAUser = (req, res) => {
         _id: req.params.id
     }).then(result => {
         console.log('result', result)
+        return res.send(result)
     })
     .catch(err => console.error(err));
 };
@@ -52,7 +54,7 @@ exports.userCreatePost = (req, res) => {
 
     console.log('newUser', newUser);
     users.create(newUser);
-    res.redirect('./');
+    return res.send(newUser)
 }
 
 // Get user to delete
@@ -73,12 +75,11 @@ exports.userDeletePost = (req, res) => {
     const id = req.params.id;
     users.findOneAndDelete({
         _id: id
-    }, (err)=> {
-        if(err){
-            console.log(err)
-        }
-    });
-    res.redirect('/user')
+    }).then(result => {
+        return res.send('deletedId ' + req.params.id)
+    }).catch(err => {
+        console.log(err)
+    })
 };
 
 // Get user to update
@@ -111,7 +112,9 @@ exports.userUpdatePost = (req, res) => {
             "height": req.body.height
         }],
         dateUpdated: dateUpdated
-    },(err, doc) => {
+    },(result => { 
+        res.send(`updatedUser: ${req.params.id}`)
+    }),(err, doc) => {
         if(err){
             console.log(err)
         } else{
@@ -119,4 +122,3 @@ exports.userUpdatePost = (req, res) => {
         }
     })
 }
-  

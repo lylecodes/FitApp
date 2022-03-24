@@ -1,14 +1,12 @@
-const user = require('../models/UserModel');
-const comment = require('../models/CommentModel');
-const commentSection = require('../models/CommentSectionModel');
-const media = require('../models/PostModel');
-const stats = require('../models/StatsModel');
+const post = require('../models/PostModel');
+
 
 
 exports.home = (req,res) => {
-  media.find() 
+  post.find() 
     .then(results => {
         console.log("results", results)
+        return res.send(results)
         //render 
     })
     .catch(err => console.error(err));
