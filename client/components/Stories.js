@@ -7,7 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import { USERS } from "../data/user";
+import { USERS } from "../data/users";
 
 const Stories = ({ navigation }) => {
   return (

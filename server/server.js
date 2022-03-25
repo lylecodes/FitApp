@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const http = require("http");
 const server = http.createServer(app);
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -17,7 +17,7 @@ app.use(
     extended: true,
   })
 );
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "50000000000000mb" }));
 app.use(cors());
 app.use("/", homeRouter);
 app.use("/post", postRouter);

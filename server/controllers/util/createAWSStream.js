@@ -1,11 +1,11 @@
 const AWS = require("aws-sdk");
 const { SmartStream } = require("./SmartStream");
 
-async function createAWSStream() {
+async function createAWSStream(mediaName) {
   return new Promise((resolve, reject) => {
     const bucketParams = {
       Bucket: process.env.AWS_BUCKET_NAME,
-      Key: "test.mp4",
+      Key: mediaName,
     };
 
     try {
@@ -29,4 +29,4 @@ async function createAWSStream() {
   });
 }
 
-module.exports.createAWSStream = createAWSStream;
+module.exports = createAWSStream;

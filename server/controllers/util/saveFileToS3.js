@@ -1,6 +1,9 @@
 const AWS = require("aws-sdk");
 
-const saveFileToS3 = (filename, blob) => {
+exports.saveFileToS3 = (mediaName, blob) => {
+  if (blob === {} || blob === undefined || blob === null) {
+    console.log("No blob found");
+  }
   const s3 = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
@@ -19,5 +22,3 @@ const saveFileToS3 = (filename, blob) => {
     console.log(`File uploaded successfully. ${data}`);
   });
 };
-
-module.exports.saveFileToS3 = saveFileToS3;
