@@ -45,4 +45,4 @@ class SmartStream extends Readable {
   }
 }
 
-module.exports.SmartStream = SmartStream;
+module.exports = SmartStream;
