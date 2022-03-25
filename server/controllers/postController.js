@@ -1,6 +1,6 @@
 const post = require("../models/PostModel");
 const mongoose = require("mongoose");
-const { saveFileToS3 } = require("util");
+const { saveFileToS3 } = require("./util/saveFileToS3");
 
 // Display the detail of a post item by ID
 exports.postItem = (req, res) => {
@@ -35,7 +35,7 @@ exports.postCreatePost = (req, res) => {
     const dateCreated = new Date(newDate);
     const blob = req.body.blob;
     // const type = blob.type;
-    const mediaName = aMediaName //+ type;
+    const mediaName = aMediaName + '.mp4'
 
     let postItem = {
     User,
